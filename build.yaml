@@ -11,6 +11,5 @@
 #   - board: nice_nano_v2
 #     shield: reviung41
 #
----
-include:
-  - board: planck_rev6
+board: ["nice_nano_v2"]
+shield: ["z50"]

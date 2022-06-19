@@ -1,0 +1,9 @@
+CONFIG_EC11=y
+CONFIC_EC11_TRIGGER_GLOBAL_THREAD=y
+
+if SHIELD_Z50
+
+config ZMK_KEYBOARD_NAME
+    default "z50"
+
+endif

@@ -1,0 +1,10 @@
+file_format: "1"
+id: z50
+name: z50
+type: shield
+url: https://github.com/schizoprenical/z50
+requires:
+  - nice_nano_v2
+features:
+  - keys
+  - encoder
