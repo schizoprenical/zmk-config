@@ -2,28 +2,24 @@
     chosen {
         zmk,kscan = &kscan0;
         zmk,battery = &vbatt;
+    };
 
-        vbatt: vbatt {
-            compatible = "zmk,battery-nrf-vddh";
-            label = "VBATT";
-        };
+    vbatt: vbatt {
+        compatible = "zmk,battery-nrf-vddh";
+        label = "VBATT";
     };
 
     left_encoder: encoder_left {
         compatible = "alps,ec11";
         label = "LEFT_ENCODER";
         a-gpios = <&pro_micro 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
-        b-gpios = <&pro_micro 9 (GPIO_ACTIVE_HIGH) | GPIO_PULL_DOWN)>;
+        b-gpios = <&pro_micro 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
         resolution = <4>;
     };
 
     sensors {
         compatible = "zmk,keymap-sensors";
         sensors = <&left_encoder>;
-    };
-
-    &left_encoder {
-        status = "okay";
     };
 
     kscan0: kscan_0 {
@@ -55,6 +51,10 @@
             <&pro_micro 14 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
             <&pro_micro 16 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>,
             <&pro_micro 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
-        };
+    };
 
+};
+
+&left_encoder {
+    status = "okay";
 };
