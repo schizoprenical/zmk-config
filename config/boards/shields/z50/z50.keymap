@@ -8,82 +8,86 @@
 #define ADJ 3
 
 / {
+
+    // Trigger Adjust layer
+    conditional_layers {
+        compatible = "zmk,conditional-layers";
+        tri_layer {
+            if-layers = <RSE LWR>;
+            then-layer = <ADJ>;
+        };
+    };
+
+    // Tap dance behaviors
+    behaviors {
+        // <ESC, CAPSLOCK>
+        td0: tap_dance_cp_esc {
+            compatible = "zmk,behavior-tap-dance";
+            label = "ESC_CAPS";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp ESCAPE>, <&kp CAPSLOCK>;
+        };
+        // <SEMICOLON, COLON>
+        td1: tap_dance_col_scol {
+            compatible = "zmk,behavior-tap-dance";
+            label = "COLON_SEMICOLON";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp SEMICOLON>, <&kp COLON>;
+        };
+        // <FORWARDSLASH, QUESTION>
+        td2: tap_dance_fslh_que {
+            compatible = "zmk,behavior-tap-dance";
+            label = "FSLASH_QUESTION";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp FSLH>, <&kp QMARK>;
+        };
+        // <COMMA, LESSTHAN>
+        td3: tap_dance_com_lt {
+            compatible = "zmk,behavior-tap-dance";
+            label = "COMMA_LESSTHAN";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp COMMA>, <&kp LESS_THAN>;
+        };
+        // <PERIOD, GREATERTHAN>
+        td4: tap_dance_dot_gt {
+            compatible = "zmk,behavior-tap-dance";
+            label = "DOT_GREATERTHAN";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            bindings = <&kp DOT>, <&kp GREATER_THAN>;
+        };
+    };
+    
+    // Macros
+    macros {
+        ctl_alt_del: ctl_alt_del {
+            label = "ZM_ctl_alt_del";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp LCTRL>,
+                <&macro_press &kp LALT>,
+                <&macro_press &kp DELETE>,
+                <&macro_release &kp LCTRL>,
+                <&macro_release &kp LALT>,
+                <&macro_release &kp DELETE>;
+        };
+        gui_lock: gui_lock {
+            label = "ZM_gui_lock";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&macro_press &kp LGUI>,
+                <&macro_press &kp L>,
+                <&macro_release &kp LGUI>,
+                <&macro_release &kp L>;
+        };
+    };
+
     keymap {
-        compatibe = "zmk,keymap";
-        // Trigger Adjust layer
-        conditional_layers {
-            compatible = "zmk,conditional-layers";
-            tri_layer {
-                if-layers = <RSE LWR>;
-                then-layer = <ADJ>;
-            };
-        };
-        // Tap dance behaviors
-        behaviors {
-            // <ESC, CAPSLOCK>
-            td0: tap_dance_cp_esc {
-                compatible = "zmk,behavior-tap-dance";
-                label = "ESC_CAPS";
-                #binding-cells = <0>;
-                tapping-term-ms = <200>;
-                bindings = <&kp ESCAPE>, <&kp CAPSLOCK>;
-            };
-            // <SEMICOLON, COLON>
-            td1: tap_dance_col_scol {
-                compatible = "zmk,behavior-tap-dance";
-                label = "COLON_SEMICOLON";
-                #binding-cells = <0>;
-                tapping-term-ms = <200>;
-                bindings = <&kp SEMICOLON>, <&kp COLON>;
-            };
-            // <FORWARDSLASH, QUESTION>
-            td2: tap_dance_fslh_que {
-                compatible = "zmk,behavior-tap-dance";
-                label = "FSLASH_QUESTION";
-                #binding-cells = <0>;
-                tapping-term-ms = <200>;
-                bindings = <&kp FSLH>, <&kp QMARK>;
-            };
-            // <COMMA, LESSTHAN>
-            td3: tap_dance_com_lt {
-                compatible = "zmk,behavior-tap-dance";
-                label = "COMMA_LESSTHAN";
-                #binding-cells = <0>;
-                tapping-term-ms = <200>;
-                bindings = <&kp COMMA>, <&kp LESS_THAN>;
-            };
-            // <PERIOD, GREATERTHAN>
-            td4: tap_dance_dot_gt {
-                compatible = "zmk,behavior-tap-dance";
-                label = "DOT_GREATERTHAN";
-                #binding-cells = <0>;
-                tapping-term-ms = <200>;
-                bindings = <&kp DOT>, <&kp GREATER_THAN>;
-            };
-        };
-        // Macros
-        macros {
-            ctl_alt_del: ctl_alt_del {
-                label = "ZM_ctl_alt_del";
-                compatible = "zmk,behavior-macro";
-                #binding-cells = <0>;
-                bindings = <&macro_press &kp LCTRL>,
-                    <&macro_press &kp LALT>,
-                    <&macro_press &kp DELETE>,
-                    <&macro_release &kp LCTRL>,
-                    <&macro_release &kp LALT>,
-                    <&macro_release &kp DELETE>;
-            };
-            gui_lock: gui_lock {
-                label = "ZM_gui_lock";
-                compatible = "zmk,behavior-macro";
-                #binding-cells = <0>;
-                bindings = <&macro_press &kp LGUI>,
-                    <&macro_press &kp L>,
-                    <&macro_release &kp LGUI>,
-                    <&macro_release &kp L>;
-            };
-        };
+        compatible = "zmk,keymap";
         // Keymaps by layer
         default_layer {
         // +-----------+----------+---------+-------+-------+-------+-------+-------+-------+-------+-------+-------+-------+---------+
@@ -104,7 +108,7 @@
                 &kp N4   &kp N9   &kp LSHIFT  &kp Z   &kp X    &kp C    &kp V     &kp B     &kp N     &kp M    &td3 &td4  &td2  &kp RETURN
                 &kp N5   &kp N0   &kp LCTRL   &none   &kp LALT &kp LGUI &mo LWR   &kp SPACE &kp SPACE &mo RSE  &kp LEFT  &kp DOWN &kp UP    &kp RIGHT
             >;
-            sensor-bingings = <&inc_dec_kp PG_UP PG_DN>;
+            sensor-bindings = <&inc_dec_kp PG_UP PG_DN>;
         };
         
         raise_layer {
@@ -129,7 +133,7 @@
                 &kp N3   &kp N8   &kp LSHIFT  &kp Z   &kp X    &kp C    &kp V     &kp B     &kp N     &kp M    &kp LT &kp GT  &kp FSLH  &kp RETURN
                 &kp N4   &kp N9   &kp LCTRL   &kp C_PP  &kp LALT &kp LGUI &mo LWR   &kp SPACE &kp SPACE &mo RSE  &kp LEFT  &kp DOWN &kp UP    &kp RIGHT
             >;
-            sensor-bingings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         lower_layer {
@@ -151,7 +155,7 @@
                 &kp N4   &kp N9   &kp LSHIFT  &bt BT_CLR   &bt BT_NXT    &bt BT_PRV  &kp V  &kp B  &kp PIPE  &kp BACKSLASH    &kp LT &kp GT  &kp FSLH  &kp RETURN
                 &kp N5   &kp N0   &kp LCTRL   &kp C_PP  &kp LALT &kp LGUI &mo LWR   &kp SPACE &kp SPACE &mo RSE  &kp HOME  &kp PG_DN &kp PG_UP    &kp END
             >;
-            sensor-bingdings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
         adjust_layer {
         // MC 4 = bootloader
