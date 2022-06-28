@@ -35,9 +35,9 @@
     left_encoder: encoder_left {
         compatible = "alps,ec11";
         label = "LEFT_ENCODER";
-        a-gpios = <&pro_micro 0 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
-        b-gpios = <&pro_micro 9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
-        resolution = <4>;
+        a-gpios = <&gpio1 01 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+        b-gpios = <&gpio1 02 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>;
+        resolution = <1>;
     };
 
     sensors {
